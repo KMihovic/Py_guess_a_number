@@ -1,0 +1,46 @@
+import random
+
+
+def guess(x, y):
+    x = 0
+    while True:
+        try:
+            x = int(input("Please enter your minimum value: "))
+            break
+        except:
+            print("Input must be a number")
+    y = 0
+    while True:
+        try:
+            y = int(input("Please enter your maximum value: "))
+            break
+        except:
+            print("Input must be a number")
+    if y < x:
+        print("Maximum value must be equal or higher than minimum value.")
+        exit()
+    random_number = random.randint(x, y)
+    while True:
+        try:
+            guess = int(input(f"\nPlease guess a number between {x} and {y}: "))
+            break
+        except:
+            print("Input must be a number")
+    tries = 0
+    while guess != random_number:
+        guess = int(guess)
+        tries += 1
+        if guess > random_number:
+            guess = input(f"Please try lower than {guess}: ")
+            if guess.isnumeric() is not True:
+                print("Please come back when you learn numbers.")
+                exit()
+        elif guess < random_number:
+            guess = input(f"Please try higher than {guess}: ")
+            if guess.isnumeric() is not True:
+                print("Please come back when you learn numbers.")
+                exit()
+    print(f"\nCongratulations, your guess {guess} is correct! \n"
+          f"You guessed in {tries} times.")
+
+guess(1, 100)
